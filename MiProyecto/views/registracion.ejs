@@ -1,56 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The UdesSA Network</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/index.css">
-</head>
+<%- include('./partials/head') %>
 
-<body>
-    <%-include('./partials/header') %>
+    <body>
+        <%-include('. /partials/header') %>
 
-    <main>
-        <section class="center main-content">
-        <h1>Regsitrate</h1>
-        <form action="/register" method="post">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <label for="Name">Nombre:</label>
-            <input type="text" id="Name" name="Name" required>
+            <main>
+                <section class="center main-content">
+                    <h1>Regsitrate</h1>
+                    <form action="/register" method="post">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
 
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="Apellido" name="Apellido" required>
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required>
 
-            <label for="fecha">Fecha de nacimiento:</label>
-            <input type="date" id="fecha_nac" name="Fecha" required>
+                        <label for="Name">Nombre:</label>
+                        <input type="text" id="Name" name="Name" required>
 
-            
-            <button type="submit">Registrarse</button>
-          </form>
-        </section>
-    </main>
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="Apellido" name="Apellido" required>
 
-    <footer class="main-footer">
-        <ul class="social">
-            <li><a href="" uk-icon="instagram"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="" uk-icon="facebook"><i class="fa-brands fa-facebook"></i></a></li>
-            <li><a href="" uk-icon="twitter"><i class="fa-brands fa-twitter"></i></a></li>
-        </ul>
-        <ul class="team">
-            <li>Martin Hernandez</li>
-            <li>Lucia Perez</li>
-            <li>Gaston Sanchez</li>
-        </ul>
-    </footer>
+                        <label for="fecha">Fecha de nacimiento:</label>
+                        <input type="date" id="fecha_nac" name="Fecha" required>
 
-</body>
+
+                        <button type="submit">Registrarse</button>
+                    </form>
+                </section>
+            </main>
+
+            <%- include('./partials/footer') %>
+
+    </body>
 
 </html>
