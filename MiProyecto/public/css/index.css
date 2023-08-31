@@ -29,6 +29,14 @@ header {
     right: 0;
     background-color: #fff;
 }
+
+.logo {
+    display: block; /* Hace que la imagen sea un elemento de bloque para controlar su posición */
+    float: left; /* Flota la imagen a la izquierda */
+    margin: 10px; /* Agrega margen alrededor de la imagen para separarla de otros elementos */
+    width: 150px; /* Ancho de la imagen */
+    height: 80px; /* Altura de la imagen */
+  }
 .main-nav {
     display: flex;
     flex-wrap: wrap;
