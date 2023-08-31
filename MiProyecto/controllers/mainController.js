@@ -1,4 +1,4 @@
-const data = require('../data/modulo-datos')
+const data = require('../db/modulo-datos')
 
 const controller = {
     register : function(req,res){
