@@ -1,4 +1,4 @@
- CREATE SCHEMA tpProgra;
+CREATE SCHEMA tpProgra;
 
 USE tpProgra;
 
