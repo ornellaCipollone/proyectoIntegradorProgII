@@ -9,7 +9,23 @@
             <main>
                 <section class="center main-content">
                     <h1>Login</h1>
-                    <p>Crear el formulario para ingresar al sitio.</p>
+                    <form method="post" action="" >
+                        <div>
+                          <label for="username"></label>
+                          <input type="text" name="username" placeholder="Nombre de usuario"></input>
+                        </div>
+                        <div>
+                          <label for="password"></label>
+                          <input type="password" name="password" required="required" placeholder="Contraseña"></input>
+                        </div>
+                        <div>
+                          <input type="submit" class="button" title="Sign In" value="Iniciar sesión"></input>
+                        </div>
+                        <div>
+                          <input type="checkbox" id="rememberme" name="rememberme">
+                          <label for="rememberme">Recordame</label>
+                        </div>
+                      </form>
                 </section>
             </main>
 
