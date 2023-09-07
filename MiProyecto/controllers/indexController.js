@@ -2,7 +2,7 @@ const data = require('../db/modulo-datos')
 
 const controller = {
     index : function(req,res){
-        res.render('index')
+        res.render('index',{usuario:data})
     },
     detallePost : function(req,res){
         let idParams = req.params.id

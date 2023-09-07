@@ -9,7 +9,20 @@
             <main>
                 <section class="center main-content">
                     <h1>Editar perfil</h1>
-                    <p>Crear el formulario para modificar los datos de perfil de un usuario.</p>
+                    <form action="/register" method="post">
+
+                        <label for="password"> Cambiar Contraseña:</label>
+                        <input type="password" id="password" name="password" required>
+
+                        <label for="Name">Cambiar apodo:</label>
+                        <input type="text" id="Name" name="Name" required>
+
+                        <label for="fecha">Cambiar Fecha de nacimiento:</label>
+                        <input type="date" id="fecha_nac" name="Fecha" required>
+
+
+                        <button type="submit">enviar</button>
+                    </form>
                 </section>
             </main>
 
