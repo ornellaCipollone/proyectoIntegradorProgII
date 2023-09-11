@@ -14,7 +14,7 @@
                             <p><%=usuario.usuario.nombre%></p>
                             <p><%=usuario.usuario.apellido%></p>
                             <p><%=usuario.usuario.fecha_nac%></p>
-                            <a class="follow" href="/profile/editar"><i class="fa-solid fa-user-gear"></i></a>
+                            <a class="follow" href="/usuarios/editProfile"><i class="fa-solid fa-user-gear"></i></a>
                             <ul class="meta">
                                 <li>100 post</li>
                                 <li>200 seguidores</li>
@@ -25,7 +25,7 @@
                     <section class="bottom">
                     <% for( let i=0; i < usuario.posteo.length; i++ ) { %>
                         <article class="post">
-                            <a href="/detallePost/id/<%= usuario.posteo[i].id %>">
+                            <a href="/posteos/detallePost/id/<%= usuario.posteo[i].id %>">
                                 <img src="/images/<%= usuario.posteo[i].imagen %>" alt="">
                             </a>
                             <p><%= usuario.posteo[i].pie %></p>

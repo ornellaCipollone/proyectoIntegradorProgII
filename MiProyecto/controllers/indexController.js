@@ -4,16 +4,14 @@ const controller = {
     index : function(req,res){
         res.render('index',{usuario:data})
     },
-    detallePost : function(req,res){
-        let idParams = req.params.id
-        for (let i=0; i<data.posteo.length; i++){
-            if (idParams == data.posteo[i].id){
-                res.render('detallePost', {post:data.posteo[i]})
-            }
-        }  
+    resultados : function(req,res){
+        res.render('resultadoBusqueda',{data:data})
     },
-    detalleUsuario : function(req,res){
-        res.render('detalleUsuario',{data:data})
+    register : function(req,res){
+        res.render('registracion')
     },
+    login : function(req,res){
+        res.render('login')
+    }
 }
 module.exports = controller

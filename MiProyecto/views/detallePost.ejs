@@ -11,7 +11,7 @@
                     <section class="center main-content post">
                         <div class="info-usuario">
                             <img src="/images/<%= post.imagen %>" alt="">
-                            <p><a href='/detalleUsuario'>Nombre de usuario</a></p>
+                            <p><a href='/usuarios/detalleUsuario'>Nombre de usuario</a></p>
                         </div>
                         <img class="photo" src="/images/<%= post.imagen %>" alt="">
                     </section>
@@ -28,7 +28,7 @@
 
                                         <img src="https://via.placeholder.com/40" alt="">
                                         <section class="content">
-                                            <a class="user" href='/detalleUsuario'><%= post.comentarios[i].comentador %></a>
+                                            <a class="user" href='/usuarios/detalleUsuario'><%= post.comentarios[i].comentador %></a>
                                             <span class="text"><%= post.comentarios[i].texto %></span>
                                         </section>
                                     </article>
