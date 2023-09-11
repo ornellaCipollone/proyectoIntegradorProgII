@@ -10,8 +10,7 @@ const controller = {
             if (idParams == data.posteo[i].id){
                 res.render('detallePost', {post:data.posteo[i]})
             }
-        }
-        
+        }  
     },
     detalleUsuario : function(req,res){
         res.render('detalleUsuario')
