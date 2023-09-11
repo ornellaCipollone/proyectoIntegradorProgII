@@ -239,6 +239,8 @@ main {
     border-radius: 90%;
     padding: 1px;
     border: 2px solid chocolate;
+    height: 60px;
+    width: 60px;
 }
 .post-reacciones {
     display: flex;
