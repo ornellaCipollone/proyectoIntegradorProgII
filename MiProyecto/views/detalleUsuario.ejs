@@ -20,32 +20,19 @@
                             </ul>
                         </div>
                     </section>
+                                        
+
+                        
                     <section class="bottom">
+                    <% for( let i=0; i < data.posteo.length; i++ ) { %>
                         <article class="post">
-                            <a href='/detallePost'>
-                                <img src="https://via.placeholder.com/200x250" alt="">
+                            <a href='/detallePost/id/<%= data.posteo[i].id %>'>
+                                <img src="/images/<%= data.posteo[i].imagen %>" alt="">
                             </a>
                         </article>
-                        <article class="post">
-                            <a href='/detallePost'>
-                                <img src="https://via.placeholder.com/200x250" alt="">
-                            </a>
-                        </article>
-                        <article class="post">
-                            <a href='/detallePost'>
-                                <img src="https://via.placeholder.com/200x250" alt="">
-                            </a>
-                        </article>
-                        <article class="post">
-                            <a href='/detallePost'>
-                                <img src="https://via.placeholder.com/200x250" alt="">
-                            </a>
-                        </article>
-                        <article class="post">
-                            <a href='/detallePost'>
-                                <img src="https://via.placeholder.com/200x250" alt="">
-                            </a>
-                        </article>
+                        <% }%>
+                        
+                        
                     </section>
                 </div>
             </main>

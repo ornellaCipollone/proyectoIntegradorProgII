@@ -14,7 +14,7 @@ const controller = {
         
     },
     detalleUsuario : function(req,res){
-        res.render('detalleUsuario')
+        res.render('detalleUsuario',{data:data})
     },
 }
 module.exports = controller
