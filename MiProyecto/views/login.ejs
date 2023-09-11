@@ -3,34 +3,42 @@
 
 <%- include('./partials/head') %>
 
-  <body>
-    <%- include('./partials/header') %>
+<body>
+  <% if (usuarioLogueado) { %>
+    <%- include('./partials/headerLogueado') %>
+  <% } else { %>
+    <%- include('./partials/headerDeslogueado') %>
+  <% } %>
 
-      <main>
-        <section class="center main-content">
-          <h1>Login</h1>
-          <form method="get" action="/">
-            <div>
-              <label for="username"></label>
-              <input type="text" name="username" placeholder="Nombre de usuario"></input>
-            </div>
-            <div>
-              <label for="password"></label>
-              <input type="password" name="password" required="required" placeholder="Contraseña"></input>
-            </div>
-            <div>
-              <input type="submit" class="button" title="Sign In" value="Iniciar sesión"></input>
-            </div>
-            <div>
-              <input type="checkbox" id="rememberme" name="rememberme">
-              <label for="rememberme">Recordame</label>
-            </div>
-          </form>
-        </section>
-      </main>
+  <main>
+    <section class="center main-content">
+      <h1>Login</h1>
+      
+      <form method="get" action="/">
+        <div>
+          <label for="username"></label>
+          <input type="text" name="username" placeholder="Nombre de usuario"></input>
+        </div>
+        
+        <div>
+          <label for="password"></label>
+          <input type="password" name="password" required="required" placeholder="Contraseña"></input>
+        </div>
+        
+        <div>
+          <input type="submit" class="button" title="Sign In" value="Iniciar sesión"></input>
+        </div>
+                    
+        <div>
+          <input type="checkbox" id="rememberme" name="rememberme">
+          <label for="rememberme">Recordarme</label>
+        </div>
+      </form>
+    </section>
+  </main>
 
-      <%- include('./partials/footer') %>
+  <%- include('./partials/footer') %>
 
-  </body>
+</body>
 
 </html>

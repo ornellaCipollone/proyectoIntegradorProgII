@@ -3,42 +3,43 @@
 
 <%- include('./partials/head') %>
 
-    <body>
-        <%- include('./partials/header') %>
-
-            <main>
-                <div class="user-detail container">
-                    <section class="top main-content">
-                        <img class="profile" src="https://via.placeholder.com/100x100" alt="">
-                        <div class="info-usuario">
-                            <p>Nombre de usuario</p>
-                            <a class="follow" href="">seguir</a>
-                            <ul class="meta">
-                                <li>100 post</li>
-                                <li>200 seguidores</li>
-                                <li>300 seguidos</li>
-                            </ul>
-                        </div>
-                    </section>
-                                        
-
-                        
-                    <section class="bottom">
-                    <% for( let i=0; i < data.posteo.length; i++ ) { %>
-                        <article class="post">
-                            <a href='/posteos/detallePost/id/<%= data.posteo[i].id %>'>
-                                <img src="/images/<%= data.posteo[i].imagen %>" alt="">
-                            </a>
-                        </article>
-                        <% }%>
-                        
-                        
-                    </section>
+<body>
+    <% if (usuarioLogueado) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+    
+    <main>
+        <div class="user-detail container">
+            <section class="top main-content">
+                <img class="profile" src="https://via.placeholder.com/100x100" alt="">
+                
+                <div class="info-usuario">
+                    <p>Nombre de usuario</p>
+                    <a class="follow" href="">Seguir</a>
+                    <ul class="meta">
+                        <li>100 Posts</li>
+                        <li>200 Seguidores</li>
+                        <li>300 Seguidos</li>
+                    </ul>
                 </div>
-            </main>
+            </section>
+                                           
+            <section class="bottom">
+                <% for( let i=0; i < data.posteo.length; i++ ) { %>
+                    <article class="post">
+                        <a href='/posteos/detallePost/id/<%= data.posteo[i].id %>'>
+                            <img src="/images/<%= data.posteo[i].imagen %>" alt="">
+                        </a>
+                    </article>
+                <% }%>      
+            </section>
+        </div>
+    </main>
 
-            <%- include('./partials/footer') %>
+    <%- include('./partials/footer') %>
 
-    </body>
+</body>
 
 </html>

@@ -3,48 +3,50 @@
 
 <%- include('./partials/head') %>
 
-    <body>
-        <%- include('./partials/header') %>
-
-            <main>
-                <div class="post-detail container">
-                    <section class="center main-content post">
-                        <div class="info-usuario">
-                            <img src="/images/<%= post.imagen %>" alt="">
-                            <p><a href='/usuarios/detalleUsuario'>Nombre de usuario</a></p>
-                        </div>
-                        <img class="photo" src="/images/<%= post.imagen %>" alt="">
-                    </section>
-                    <section class="right">
-                        <h4>Comentarios</h4>
-                        <section class="comments">
-                            <form action="" class="comment-form">
-                                <input type="text" class="input" placeholder="Agregar comentario">
-                                <button type="submit">Comentar</button>
-                            </form>
-                            <div>
-                                <% for( let i=0; i < post.comentarios.length; i++ ) { %>
-                                    <article class="comment">
-
-                                        <img src="https://via.placeholder.com/40" alt="">
-                                        <section class="content">
-                                            <a class="user" href='/usuarios/detalleUsuario'><%= post.comentarios[i].comentador %></a>
-                                            <span class="text"><%= post.comentarios[i].texto %></span>
-                                        </section>
-                                    </article>
-                                    <% }%>
-
-                                    
-                               
-                            
-                            </div>
-                        </section>
-                    </section>
+<body>
+    <% if (usuarioLogueado) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+    
+    <main>
+        <div class="post-detail container">
+            
+            <section class="center main-content post">
+                <div class="info-usuario">
+                    <img src="/images/<%= post.imagen %>" alt="">
+                    <p><a href='/usuarios/detalleUsuario'>Nombre de usuario</a></p>
                 </div>
-            </main>
+                <img class="photo" src="/images/<%= post.imagen %>" alt="">
+            </section>
+                    
+            <section class="right">
+                <h4>Comentarios</h4>
+                <section class="comments">
+                    <form action="" class="comment-form">
+                        <input type="text" class="input" placeholder="Agregar comentario">
+                        <button type="submit">Comentar</button>
+                    </form>
+                            
+                    <div>
+                        <% for( let i=0; i < post.comentarios.length; i++ ) { %>
+                            <article class="comment">
+                                <img src="https://via.placeholder.com/40" alt="">
+                                <section class="content">
+                                    <a class="user" href='/usuarios/detalleUsuario'><%= post.comentarios[i].comentador %></a>
+                                    <span class="text"><%= post.comentarios[i].texto %></span>
+                                </section>
+                            </article>
+                        <% }%>    
+                    </div>
+                </section>
+            </section>
+        </div>
+    </main>
 
-            <%- include('./partials/footer') %>
+    <%- include('./partials/footer') %>
 
-    </body>
+</body>
 
 </html>

@@ -3,31 +3,34 @@
 
 <%- include('./partials/head') %>
 
-    <body>
-        <%- include('./partials/header') %>
+<body>
+    <% if (usuarioLogueado) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
 
-            <main>
-                <section class="center main-content">
-                    <h1>Editar perfil</h1>
-                    <form action="" method="post">
+    <main>
+        <section class="center main-content">
+            <h1>Editar perfil</h1>
+            
+            <form action="" method="post">
+                <label for="password">Cambiar contraseña:</label>
+                <input type="password" id="password" name="password" required>
 
-                        <label for="password"> Cambiar Contraseña:</label>
-                        <input type="password" id="password" name="password" required>
+                <label for="Name">Cambiar apodo:</label>
+                <input type="text" id="Name" name="Name" required>
 
-                        <label for="Name">Cambiar apodo:</label>
-                        <input type="text" id="Name" name="Name" required>
+                <label for="fecha">Cambiar fecha de nacimiento:</label>
+                <input type="date" id="fecha_nac" name="Fecha" required>
 
-                        <label for="fecha">Cambiar Fecha de nacimiento:</label>
-                        <input type="date" id="fecha_nac" name="Fecha" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
 
+    <%- include('./partials/footer') %>
 
-                        <button type="submit">enviar</button>
-                    </form>
-                </section>
-            </main>
-
-            <%- include('./partials/footer') %>
-
-    </body>
+</body>
 
 </html>
