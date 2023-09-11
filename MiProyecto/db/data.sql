@@ -1,8 +1,6 @@
+
 CREATE SCHEMA tpProgra;
-
 USE tpProgra;
-
-
 
 CREATE TABLE usuario (
 	id_usuario	INT 	UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -28,6 +26,7 @@ CREATE TABLE posteo (
     update_at 	TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     delete_at 	TIMESTAMP 		NULL
 );
+
 CREATE TABLE comentarios (
 	id_comentario 	INT 	UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     id_post 	INT UNSIGNED NOT NULL,
@@ -37,9 +36,9 @@ CREATE TABLE comentarios (
     texto 		VARCHAR(200) 	NOT NULL,
 	created_at 	TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP,
     update_at 	TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    delete_at 	TIMESTAMP 		NULL
-    
+    delete_at 	TIMESTAMP 		NULL  
 );
+
 INSERT INTO usuario 
 VALUES (DEFAULT,"ramiro","lohrmann","lohrmannramiro@gmail.com","Ramiro",'2003-05-28',44997949,"foto",DEFAULT,DEFAULT,DEFAULT);
 INSERT INTO usuario 
