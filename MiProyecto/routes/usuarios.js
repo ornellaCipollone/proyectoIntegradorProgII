@@ -7,5 +7,4 @@ router.get('/detalleUsuario', controller.detalleUsuario)
 router.get('/profile', controller.miPerfil)
 router.get('/editProfile', controller.editarPerfil)
 
-
 module.exports = router
