@@ -33,7 +33,7 @@ CREATE TABLE comentarios (
     id_post 	INT UNSIGNED NOT NULL,
     FOREIGN KEY (id_post) REFERENCES posteo(id_posteo),
     id_usuario 	INT UNSIGNED NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     texto 		VARCHAR(200) 	NOT NULL,
 	created_at 	TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP,
     update_at 	TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
