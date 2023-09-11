@@ -9,6 +9,7 @@ const profileRouter = require("./routes/profile")
 const registerRouter = require("./routes/register")
 const loginRouter = require("./routes/login")
 const agregarPostRouter = require("./routes/agregarPost")
+const SearchRouter = require("./routes/searchresult")
 
 
 
@@ -30,6 +31,7 @@ app.use("/profile" , profileRouter)
 app.use("/register" , registerRouter)
 app.use("/login" , loginRouter)
 app.use("/agregarPost" , agregarPostRouter)
+app.use('/buscar',SearchRouter)
 
 
 
