@@ -16,7 +16,8 @@
                 <img class="profile" src="https://via.placeholder.com/100x100" alt="">
                 
                 <div class="info-usuario">
-                    <p>Nombre de usuario</p>
+                    <p><%= data.nombre%></p>
+                    <p><%= data.apellido%></p>
                     <a class="follow" href="">Seguir</a>
                     <ul class="meta">
                         <li>100 Posts</li>
@@ -27,10 +28,12 @@
             </section>
                                            
             <section class="bottom">
-                <% for( let i=0; i < data.posteo.length; i++ ) { %>
+                <% for( let i=0; i < data.usuarioPosteo.length; i++ ) { %>
                     <article class="post">
-                        <a href='/posteos/detallePost/id/<%= data.posteo[i].id %>'>
-                            <img src="/images/<%= data.posteo[i].imagen %>" alt="">
+                        <a href='/posteos/detallePost/id/<%= data.usuarioPosteo[i].id_posteo %>'>
+                            <img src="/images/<%= data.usuarioPosteo[i].nom %>" alt="">
+                            <p><%=data.usuarioPosteo[i].pie %></p>
+                        
                         </a>
                     </article>
                 <% }%>      

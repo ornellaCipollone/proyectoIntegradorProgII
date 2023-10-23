@@ -1,6 +1,7 @@
 const db = require('../database/models')
 const posteo  = db.Posteo
 const usuario = db.Usuario
+const op = db.Sequelize.Op
 
 const controller = {
     index : function(req,res){
@@ -13,7 +14,7 @@ const controller = {
             ]
         })
         .then(function (datosEncontrados) {
-            // return res.send(datosEncontrados)
+            //return res.send(datosEncontrados)
             return res.render('index', {posteo : datosEncontrados, usuarioLogueado: false})
 
         }).catch(function (error) {
@@ -22,14 +23,22 @@ const controller = {
         })        
     },
     resultados : function(req,res){
-        let busqueda = req.query
+        let busqueda = req.query.busqueda
         
 
-        // usuario.findAll({
-        //     where : [ {nombre : {[op.like] : ""}}]
-        // })
-        // res.render('resultadoBusqueda', {data: data, usuarioLogueado: true})
-        res.send(busqueda)
+        usuario.findAll({
+            where : [ {nombre : {[op.like] : "%"+busqueda+"%"}}]
+        })
+        .then(function(datosEncontrados){
+           res.render('resultadoBusqueda', {usuario: datosEncontrados, usuarioLogueado: true}) 
+          // res.send(datosEncontrados)
+    })
+        .catch(error => {
+            res.send("error")
+        })
+        
+        
+
     },
     register : function(req,res){
         res.render('registracion', {usuarioLogueado: false})

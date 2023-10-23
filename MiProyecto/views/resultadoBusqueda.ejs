@@ -13,12 +13,13 @@
     <main>
         <section class="center main-content">
             <h1>Resultados de búsqueda:</h1>
-            <% for( let i=0; i < 3; i++ ) { %>
+            <% for( let i=0; i < 10; i++ ) { %>
                 <article class="post">
-                    <a href="/posteos/detallePost/id/<%= data.posteo[i].id %>">
-                        <img src="/images/<%= data.posteo[i].imagen %>" alt="">
+                    <a href="/usuarios/detalleUsuario/id/<%= usuario[i].id_usuario %>">
+                        <h4><%= usuario[i].nombre%> + " " + <%= usuario[i].apellido%></h4>
+                        <img src="/usuarios/detalleUsuario/id/<%= usuario[i].foto %>" alt="">
                     </a>
-                    <p><%= data.posteo[i].pie %></p>
+                    
                 </article>
             <% } %>
         </section>
