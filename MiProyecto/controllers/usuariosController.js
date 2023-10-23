@@ -1,4 +1,4 @@
-const data = require('../db/modulo-datos')
+const db = require('../database/models')
 
 const controller = {
     detalleUsuario : function(req,res){

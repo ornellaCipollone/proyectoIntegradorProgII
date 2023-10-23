@@ -32,17 +32,17 @@ module.exports = function (sequelize, dataTypes) {
         created_at: {
             type: dataTypes.DATE
         },
-        update_at: {
+        updated_at: {
             type: dataTypes.DATE
         },
-        delete_at: {
+        deleted_at: {
             type: dataTypes.DATE
         }
     };
 
     let config = {
         tableName: "usuario",
-        timestamps: true,
+        timestamps: false,
         underscored: true,
     };
 

@@ -1,5 +1,4 @@
-const data = require('../db/modulo-datos')
-
+const db = require('../database/models')
 const controller = {
     detallePost : function(req,res){
         let idParams = req.params.id

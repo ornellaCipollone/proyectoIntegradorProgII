@@ -9,25 +9,25 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER
         },
         nom: {
-            type: dataTypes.STRING(50)
+            type: dataTypes.STRING
         },
         pie: {
-            type: dataTypes.STRING(50)
+            type: dataTypes.STRING
         },
         created_at: {
             type: dataTypes.DATE
         },
-        update_at: {
+        updated_at: {
             type: dataTypes.DATE
         },
-        delete_at: {
+        deleted_at: {
             type: dataTypes.DATE
         }
     };
 
     let config = {
         tableName: "posteo",
-        timestamps: true,
+        timestamps: false,
         underscored: true,
     };
 

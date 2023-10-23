@@ -1,8 +1,24 @@
-const data = require('../db/modulo-datos')
+const db = require('../database/models')
+const posteo  = db.Posteo
 
 const controller = {
     index : function(req,res){
-        res.render('index', {usuario: data, usuarioLogueado: false})
+
+        posteo.findAll({
+            include: [
+                {association: "posteoComentario", 
+                 include:[ {association: "comentarioUsuario"}]},
+                {association: "posteoUsuario"}
+            ]
+        })
+        .then(function (datosEncontrados) {
+            // return res.send(datosEncontrados)
+            return res.render('index', {posteo : datosEncontrados, usuarioLogueado: false})
+
+        }).catch(function (error) {
+            res.send(error)
+
+        })        
     },
     resultados : function(req,res){
         res.render('resultadoBusqueda', {data: data, usuarioLogueado: true})

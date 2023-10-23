@@ -12,18 +12,18 @@
 
     <main>
         <section class="center main-content">
-            <% for( let i=0; i < usuario.posteo.length; i++ ) { %>
+            <% for( let i=0; i < posteo.length; i++ ) { %>
                 <article class="post">
                     <div class="info-usuario ">
                         <img src="https://via.placeholder.com/40" alt="">
                         <h4>
-                            <a href='/usuarios/detalleUsuario'>Usuario</a>
+                            <a href='/usuarios/detalleUsuario/id/<%= posteo[i].posteoUsuario.id_usuario %>'> <%= posteo[i].posteoUsuario.nombre + " " + posteo[i].posteoUsuario.apellido %></a>
                         </h4>
                     </div>
                 
                     <div class="post-body">
-                        <a href="/posteos/detallePost/id/<%= usuario.posteo[i].id %>">
-                            <img src="/images/<%= usuario.posteo[i].imagen %>" alt="">
+                        <a href="/posteos/detallePost/id/<%= posteo[i].id_post %>">
+                            <img src="<%= posteo[i].nom %>" alt="">
                         </a>
                     </div>
                         
@@ -36,12 +36,12 @@
                         </li>
                     </ul>
                 
-                    <div class="post-comentarios">
+                   <div class="post-comentarios">
                         <h4>Comentarios</h4>
                             <% for( let j=0; j < 3; j++ ) { %>
-                                <h4><%= usuario.posteo[i].comentarios[j].texto %></h4>
+                                <h4><strong> <%= posteo[i].posteoComentario[j].comentarioUsuario.nombre + " " + posteo[i].posteoComentario[j].comentarioUsuario.apellido%></strong>  <%= posteo[i].posteoComentario[j].texto %></h4>
                             <% } %>
-                    </div>
+                    </div> 
                 </article>
             <% } %>        
         </section>
