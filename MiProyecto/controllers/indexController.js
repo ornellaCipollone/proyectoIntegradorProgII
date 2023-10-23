@@ -1,5 +1,6 @@
 const db = require('../database/models')
 const posteo  = db.Posteo
+const usuario = db.Usuario
 
 const controller = {
     index : function(req,res){
@@ -21,7 +22,14 @@ const controller = {
         })        
     },
     resultados : function(req,res){
-        res.render('resultadoBusqueda', {data: data, usuarioLogueado: true})
+        let busqueda = req.query
+        
+
+        // usuario.findAll({
+        //     where : [ {nombre : {[op.like] : ""}}]
+        // })
+        // res.render('resultadoBusqueda', {data: data, usuarioLogueado: true})
+        res.send(busqueda)
     },
     register : function(req,res){
         res.render('registracion', {usuarioLogueado: false})
