@@ -45,6 +45,28 @@ const controller = {
     },
     login : function(req,res){
         return res.render('login', {usuarioLogueado: false})
+    },
+    registerPost : function(req,res){
+        
+        let user = {
+            nombre : req.body.name,
+            apellido : req.body.Apellido,
+            email : req.body.email,
+            pass : bcrypt.hashSync(req.body.password),
+            fecha_nac : req.body.Fecha ,
+            dni : req.body.dni,
+            foto : req.body.foto 
+        }
+        usuario.create(user)
+        .then(function(result){
+            return res.redirect('/login')
+        })
+        .catch(function(error){
+            return res.send (error)
+        })
+    },
+    loginPost : function(req,res){
+
     }
 }
 module.exports = controller
