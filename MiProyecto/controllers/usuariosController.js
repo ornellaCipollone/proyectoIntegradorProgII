@@ -32,17 +32,17 @@ const controller = {
         })
         .then(function(resultado) {
             // res.send(resultado)
-            res.render('detalleUsuario', {data: resultado, usuarioLogueado: true})
+            return res.render('detalleUsuario', {data: resultado, usuarioLogueado: true})
         })
         .catch(function(error) {
-            res.send("error");
+             return res.send("error");
         });
     },
     miPerfil : function(req,res){
-        res.render('miPerfil', {usuario: data, usuarioLogueado: true})
+        return res.render('miPerfil', {usuario: data, usuarioLogueado: true})
     },
     editarPerfil : function(req,res){
-        res.render('editarPerfil', {usuario: data, usuarioLogueado: true})
+        return res.render('editarPerfil', {usuario: data, usuarioLogueado: true})
     }
 }
 module.exports = controller

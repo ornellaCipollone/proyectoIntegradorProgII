@@ -18,7 +18,7 @@ const controller = {
             return res.render('index', {posteo : datosEncontrados, usuarioLogueado: false})
 
         }).catch(function (error) {
-            res.send(error)
+            return res.send(error)
 
         })        
     },
@@ -30,21 +30,21 @@ const controller = {
             where : [ {nombre : {[op.like] : "%"+busqueda+"%"}}]
         })
         .then(function(datosEncontrados){
-           res.render('resultadoBusqueda', {usuario: datosEncontrados, usuarioLogueado: true}) 
+           return res.render('resultadoBusqueda', {usuario: datosEncontrados, usuarioLogueado: true}) 
           // res.send(datosEncontrados)
     })
         .catch(error => {
-            res.send("error")
+            return res.send("error")
         })
         
         
 
     },
     register : function(req,res){
-        res.render('registracion', {usuarioLogueado: false})
+        return res.render('registracion', {usuarioLogueado: false})
     },
     login : function(req,res){
-        res.render('login', {usuarioLogueado: false})
+        return res.render('login', {usuarioLogueado: false})
     }
 }
 module.exports = controller
