@@ -8,7 +8,7 @@ module.exports = function (sequelize, dataTypes) {
             primaryKey: true,
             type: dataTypes.INTEGER
         },
-        nom: {
+        foto: {
             type: dataTypes.STRING
         },
         pie: {

@@ -15,16 +15,17 @@
             <% for( let i=0; i < posteo.length; i++ ) { %>
                 <article class="post">
                     <div class="info-usuario ">
-                        <img src="https://via.placeholder.com/40" alt="">
+                        <img src="<%= posteo[i].posteoUsuario.foto%>" alt="">
                         <h4>
-                            <a href='/usuarios/detalleUsuario/id/<%= posteo[i].posteoUsuario.id_usuario %>'> <%= posteo[i].posteoUsuario.nombre + " " + posteo[i].posteoUsuario.apellido %></a>
+                            <a href='/usuarios/detalleUsuario/id/<%= posteo[i].posteoUsuario.id_usuario %>'> <%= posteo[i].posteoUsuario.nombre%></a>
                         </h4>
                     </div>
                 
                     <div class="post-body">
                         <a href="/posteos/detallePost/id/<%= posteo[i].id_post %>">
-                            <img src="<%= posteo[i].nom %>" alt="">
+                            <img src="<%= posteo[i].foto %>" alt="">
                         </a>
+                        <h4><strong><%= posteo[i].posteoUsuario.nombre%></strong>: <%= posteo[i].pie%></h4>
                     </div>
                         
                     <ul class="post-reacciones">
@@ -39,7 +40,7 @@
                    <div class="post-comentarios">
                         <h4>Comentarios</h4>
                             <% for( let j=0; j < 3; j++ ) { %>
-                                <h4><strong> <%= posteo[i].posteoComentario[j].comentarioUsuario.nombre + " " + posteo[i].posteoComentario[j].comentarioUsuario.apellido%></strong>  <%= posteo[i].posteoComentario[j].texto %></h4>
+                                <h4><strong> <%= posteo[i].posteoComentario[j].comentarioUsuario.nombre%></strong>: <%= posteo[i].posteoComentario[j].texto %></h4>
                             <% } %>
                     </div> 
                 </article>
