@@ -25,7 +25,8 @@
                         <a href="/posteos/detallePost/id/<%= posteo[i].id_post %>">
                             <img src="<%= posteo[i].foto %>" alt="">
                         </a>
-                        <h4><strong><%= posteo[i].posteoUsuario.nombre%></strong>: <%= posteo[i].pie%></h4>
+                        <h4><strong><%= posteo[i].posteoUsuario.nombre%></strong>:</h4>
+                        <p> <%= posteo[i].pie%></p>
                     </div>
                         
                     <ul class="post-reacciones">
@@ -40,7 +41,15 @@
                    <div class="post-comentarios">
                         <h4>Comentarios</h4>
                             <% for( let j=0; j < 3; j++ ) { %>
-                                <h4><strong> <%= posteo[i].posteoComentario[j].comentarioUsuario.nombre%></strong>: <%= posteo[i].posteoComentario[j].texto %></h4>
+                                <div>
+                                    <h4>
+                                        <a href="/usuarios/detalleUsuario/id/<%= posteo[i].posteoComentario[j].comentarioUsuario.id_usuario%>">
+                                            <strong> <%= posteo[i].posteoComentario[j].comentarioUsuario.nombre%>:</strong>
+                                        </a>
+                                    </h4>
+                                    <p><%= posteo[i].posteoComentario[j].texto %></p>
+    
+                                </div>
                             <% } %>
                     </div> 
                 </article>

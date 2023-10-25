@@ -13,11 +13,11 @@ const controller = {
                 {association: "posteoUsuario"}
             ]
         })
-        .then(function (datosEncontrados) {
+        .then((datosEncontrados)=> {
             //return res.send(datosEncontrados)
             return res.render('index', {posteo : datosEncontrados, usuarioLogueado: false})
 
-        }).catch(function (error) {
+        }).catch((error)=> {
             return res.send(error)
 
         })        
@@ -25,20 +25,16 @@ const controller = {
     resultados : function(req,res){
         let busqueda = req.query.busqueda
         
-
         usuario.findAll({
             where : [ {nombre : {[op.like] : "%"+busqueda+"%"}}]
         })
-        .then(function(datosEncontrados){
-           return res.render('resultadoBusqueda', {usuario: datosEncontrados, usuarioLogueado: true}) 
-          // res.send(datosEncontrados)
+        .then((datosEncontrados)=> {
+            return res.render('resultadoBusqueda', {usuario: datosEncontrados, usuarioLogueado: true}) 
+            // res.send(datosEncontrados)
     })
-        .catch(error => {
+        .catch((error)=> {
             return res.send("error")
         })
-        
-        
-
     },
     register : function(req,res){
         return res.render('registracion', {usuarioLogueado: false})
@@ -57,11 +53,12 @@ const controller = {
             dni : req.body.dni,
             foto : req.body.foto 
         }
+        
         usuario.create(user)
-        .then(function(result){
+        .then((result)=> {
             return res.redirect('/login')
         })
-        .catch(function(error){
+        .catch((error)=> {
             return res.send (error)
         })
     },
@@ -71,7 +68,7 @@ const controller = {
         usuario.findOne({
             where: [{email:emailBuscado}]
         })
-        .then(function(result){
+        .then((result)=> {
             if (result != null) {
                 let check = bcrypt.compareSync(pass, result.pass)
                 if (check) {
@@ -82,7 +79,7 @@ const controller = {
                 }
             }
         })
-        .catch(function(error){
+        .catch((error)=> {
             return res.send(error)
         })
     }

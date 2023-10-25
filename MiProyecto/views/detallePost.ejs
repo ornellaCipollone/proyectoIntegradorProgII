@@ -15,10 +15,18 @@
             
             <section class="center main-content post">
                 <div class="info-usuario">
-                    <img src="/images/<%= post.imagen %>" alt="">
-                    <p><a href='/usuarios/detalleUsuario/'>Nombre de usuario</a></p>
+                    <img src="<%= post.posteoUsuario.foto %>" alt="">
+                    <p>
+                        <a href='/usuarios/detalleUsuario/id/<%= post.posteoUsuario.id_usuario %>'>
+                            <%= post.posteoUsuario.nombre %>
+                        </a>
+                    </p>
                 </div>
-                <img class="photo" src="/images/<%= post.imagen %>" alt="">
+                <div class="detallePosteo">
+                    <img class="photo" src= "<%= post.foto %>" alt="">
+                    <p><%= post.pie %></p>
+                </div>
+                
             </section>
                     
             <section class="right">
@@ -30,12 +38,14 @@
                     </form>
                             
                     <div>
-                        <% for( let i=0; i < post.comentarios.length; i++ ) { %>
+                        <% for( let i=0; i < post.posteoComentario.length; i++ ) { %>
                             <article class="comment">
-                                <img src="https://via.placeholder.com/40" alt="">
+                                <img src="<%= post.posteoComentario[i].comentarioUsuario.foto %>" alt="">
                                 <section class="content">
-                                    <a class="user" href='/usuarios/detalleUsuario'><%= post.comentarios[i].comentador %></a>
-                                    <span class="text"><%= post.comentarios[i].texto %></span>
+                                    <a class="user" href="/usuarios/detalleUsuario/id/<%= post.posteoComentario[i].comentarioUsuario.id_usuario%>">
+                                        <strong> <%= post.posteoComentario[i].comentarioUsuario.nombre%>:</strong>
+                                    </a>
+                                    <span class="text"><%= post.posteoComentario[i].texto %></span>
                                 </section>
                             </article>
                         <% }%>    

@@ -9,14 +9,15 @@ const controller = {
         let idUsuario = req.params.id;
         usuario.findByPk(idUsuario, {
             include: [
-                { association: "usuarioPosteo", include: [{ association: "posteoComentario" }] }
+                {association: "usuarioPosteo", 
+                include: [{ association: "posteoComentario" }]}
             ]
         })
-        .then(function(resultado) {
+        .then((resultado)=> {
             // res.send(resultado)
-            return res.render('detalleUsuario', {data: resultado, usuarioLogueado: true})
+            return res.render('detalleUsuario', {usuario: resultado, usuarioLogueado: true})
         })
-        .catch(function(error) {
+        .catch((error)=> {
              return res.send("error");
         });
     },

@@ -3,17 +3,18 @@ const post = db.Posteo
 const controller = {
     detallePost : function(req,res){
         let idParams = req.params.id
-        post.findByPK(idParams,{
+        post.findByPk(idParams,{
             include: [
                 {association: "posteoComentario", 
-                 include:[ {association: "comentarioUsuario"}]},
+                 include:[{association: "comentarioUsuario"}]},
                 {association: "posteoUsuario"}
             ]
         })
-        .then(function(result){
+        .then((result)=> {
+            //return res.send(result)
             return res.render('detallePost', {post: result, usuarioLogueado: true})
         })
-        .catch(function(error){
+        .catch((error)=> {
             return res.send(error)
         }) 
     },
