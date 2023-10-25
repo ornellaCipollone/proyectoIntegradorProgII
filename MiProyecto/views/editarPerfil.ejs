@@ -14,7 +14,7 @@
         <section class="center main-content">
             <h1>Editar perfil</h1>
             
-            <form action="/usuarios/profile" method="get">
+            <form action="/usuarios/profile" method="POST">
                 <label for="password">Cambiar contraseña:</label>
                 <input type="password" id="password" name="password" required>
 
@@ -24,7 +24,8 @@
                 <label for="fecha">Cambiar fecha de nacimiento:</label>
                 <input type="date" id="fecha_nac" name="Fecha" required>
 
-                <button type="submit">Enviar</button>
+
+                <button type="submit">Editar</button>
             </form>
         </section>
     </main>
