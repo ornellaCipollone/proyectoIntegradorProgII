@@ -66,7 +66,25 @@ const controller = {
         })
     },
     loginPost : function(req,res){
-
+        let emailBuscado = req.body.email
+        let pass = req.body.pass
+        usuario.findOne({
+            where: [{email:emailBuscado}]
+        })
+        .then(function(result){
+            if (result != null) {
+                let check = bcrypt.compareSync(pass, result.pass)
+                if (check) {
+                    return res.redirect('/profile')
+                }
+                else {
+                    return res.render ('/login')
+                }
+            }
+        })
+        .catch(function(error){
+            return res.send(error)
+        })
     }
 }
 module.exports = controller

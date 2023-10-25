@@ -5,24 +5,6 @@ const op = db.Sequelize.Op
 
 
 const controller = {
-    // detalleUsuario : function(req,res){
-    //     let idUsuario = req.params.id
-    //     usuario.findByPk(idUsuario,{
-    //         include : [
-    //             {association: "posteoComentario", 
-    //              include:[ {association: "comentarioUsuario"}]},
-    //             {association: "posteoUsuario"}
-    //         ]
-    //     })
-    //     .then(function(resultado){
-    //        // res.render('detalleUsuario', {data: resultado, usuarioLogueado: true})
-    //        res.send(resultado)
-    //     })
-    //     .catch(function(error){
-    //         res.send("error")
-    //     })
-        
-    // },
     detalleUsuario: function(req, res) {
         let idUsuario = req.params.id;
         usuario.findByPk(idUsuario, {
