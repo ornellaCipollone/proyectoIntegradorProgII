@@ -4,7 +4,7 @@
 <%- include('./partials/head') %>
 
 <body>
-    <% if (usuarioLogueado) { %>
+    <% if (locals.user != null) { %>
         <%- include('./partials/headerLogueado') %>
     <% } else { %>
         <%- include('./partials/headerDeslogueado') %>

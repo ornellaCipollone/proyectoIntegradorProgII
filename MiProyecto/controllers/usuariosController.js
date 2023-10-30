@@ -22,7 +22,19 @@ const controller = {
         });
     },
     miPerfil : function(req,res){
-        return res.render('miPerfil', {usuario: data, usuarioLogueado: true})
+
+        let idUsuarioLogueado = req.session.user.id_usuario;
+        usuario.findByPk(idUsuarioLogueado,{
+            include : [{association : "usuarioPosteo"}]
+        })
+        .then(function(result){
+            return res.render('miPerfil',{usuario:result})
+        })
+        .catch(function(error){
+            return res.send(error)
+        })
+        
+       
     },
     editarPerfil : function(req,res){
         return res.render('editarPerfil', {usuario: data, usuarioLogueado: true})

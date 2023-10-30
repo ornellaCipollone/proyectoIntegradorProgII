@@ -2,6 +2,7 @@ const db = require('../database/models')
 const posteo  = db.Posteo
 const usuario = db.Usuario
 const op = db.Sequelize.Op
+const bcrypt = require('bcryptjs')
 
 const controller = {
     index : function(req,res){
@@ -64,24 +65,39 @@ const controller = {
     },
     loginPost : function(req,res){
         let emailBuscado = req.body.email
-        let pass = req.body.pass
-        usuario.findOne({
-            where: [{email:emailBuscado}]
-        })
-        .then((result)=> {
-            if (result != null) {
-                let check = bcrypt.compareSync(pass, result.pass)
-                if (check) {
-                    return res.redirect('/profile')
+        let pass = req.body.password
+        let remember = req.body.rememberme
+        let errors= []
+   
+    usuario.findOne({
+        where: [{email:emailBuscado}]
+    })
+    .then((result)=> {
+        let user = result.dataValues;
+        console.log(bcrypt.compareSync(pass, user.pass));
+       
+        if (user != null) {
+            let check = bcrypt.compareSync(pass, user.pass);
+          
+            if (check) {
+                req.session.user = user;
+                if (remember!=undefined) {
+                    res.cookie('userId', user.id_usuario,{maxAge:1000 * 60 * 5})
                 }
-                else {
-                    return res.render ('/login')
-                }
+                return res.redirect('/usuarios/profile')
             }
-        })
-        .catch((error)=> {
-            return res.send(error)
-        })
+            else {
+                return res.render ('/login')
+            }
+        }
+        else {
+            return res.send("no existe usuario con el email:"+ emailBuscado)
+        }
+    })
+    .catch((error)=> {
+        return res.send({data:error})
+    })
+        
     }
 }
 module.exports = controller
