@@ -4,7 +4,7 @@
 <%- include('./partials/head') %>
 
 <body>
-    <% if (usuarioLogueado) { %>
+    <% if (locals.user != null) { %>
         <%- include('./partials/headerLogueado') %>
     <% } else { %>
         <%- include('./partials/headerDeslogueado') %>
@@ -16,10 +16,9 @@
             <% for( let i=0; i < 10; i++ ) { %>
                 <article class="post">
                     <a href="/usuarios/detalleUsuario/id/<%= usuario[i].id_usuario %>">
-                        <h4><%= usuario[i].nombre%> + " " + <%= usuario[i].apellido%></h4>
-                        <img src="/usuarios/detalleUsuario/id/<%= usuario[i].foto %>" alt="">
+                        <h4><%= usuario[i].nombre%></h4>
+                        <img src="<%= usuario[i].foto %>" alt="">
                     </a>
-                    
                 </article>
             <% } %>
         </section>

@@ -8,6 +8,9 @@ const indexRouter = require('./routes/index');
 const posteosRouter = require('./routes/posteos');
 const usuariosRouter = require('./routes/usuarios');
 
+const db = require('./database/models')
+
+
 var app = express();
 
 // view engine setup
@@ -19,7 +22,41 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+const session = require('express-session')
 
+app.use(session({ secret: "secreto",
+  resave: false,
+  saveUninitialized : true}))
+
+  
+app.use(function(req,res,next){
+  if (req.session.user != undefined){
+    res.locals.user = req.session.user
+    return next()
+
+  }
+  return next()
+})
+
+app.use(function(req,res,next){
+  if (req.cookies.userId != undefined && req.session.user== undefined) {
+    let idUsuario = req.cookies.userId
+    db.User.findByPk (idUsuario)
+
+    .then(function(user){
+      req.session.user = user.dataValues
+      res.locals.user=user.dataValues
+      return next()
+    })
+    .catch(function(error){
+      return next()
+    })
+  }
+
+  return next();
+})
+
+g
 app.use('/', indexRouter);
 app.use("/posteos" , posteosRouter)
 app.use("/usuarios" , usuariosRouter)

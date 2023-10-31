@@ -5,41 +5,36 @@ const op = db.Sequelize.Op
 
 
 const controller = {
-    // detalleUsuario : function(req,res){
-    //     let idUsuario = req.params.id
-    //     usuario.findByPk(idUsuario,{
-    //         include : [
-    //             {association: "posteoComentario", 
-    //              include:[ {association: "comentarioUsuario"}]},
-    //             {association: "posteoUsuario"}
-    //         ]
-    //     })
-    //     .then(function(resultado){
-    //        // res.render('detalleUsuario', {data: resultado, usuarioLogueado: true})
-    //        res.send(resultado)
-    //     })
-    //     .catch(function(error){
-    //         res.send("error")
-    //     })
-        
-    // },
     detalleUsuario: function(req, res) {
         let idUsuario = req.params.id;
         usuario.findByPk(idUsuario, {
             include: [
-                { association: "usuarioPosteo", include: [{ association: "posteoComentario" }] }
+                {association: "usuarioPosteo", 
+                include: [{ association: "posteoComentario" }]}
             ]
         })
-        .then(function(resultado) {
+        .then((resultado)=> {
             // res.send(resultado)
-            return res.render('detalleUsuario', {data: resultado, usuarioLogueado: true})
+            return res.render('detalleUsuario', {usuario: resultado, usuarioLogueado: true})
         })
-        .catch(function(error) {
+        .catch((error)=> {
              return res.send("error");
         });
     },
     miPerfil : function(req,res){
-        return res.render('miPerfil', {usuario: data, usuarioLogueado: true})
+
+        let idUsuarioLogueado = req.session.user.id_usuario;
+        usuario.findByPk(idUsuarioLogueado,{
+            include : [{association : "usuarioPosteo"}]
+        })
+        .then(function(result){
+            return res.render('miPerfil',{usuario:result})
+        })
+        .catch(function(error){
+            return res.send(error)
+        })
+        
+       
     },
     editarPerfil : function(req,res){
         return res.render('editarPerfil', {usuario: data, usuarioLogueado: true})

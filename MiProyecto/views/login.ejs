@@ -4,20 +4,20 @@
 <%- include('./partials/head') %>
 
 <body>
-  <% if (usuarioLogueado) { %>
+  <% if (locals.user != null) { %>
     <%- include('./partials/headerLogueado') %>
-  <% } else { %>
+<% } else { %>
     <%- include('./partials/headerDeslogueado') %>
-  <% } %>
+<% } %>
 
   <main>
     <section class="center main-content">
       <h1>Login</h1>
       
-      <form method="get" action="/usuarios/profile">
+      <form method="post" action="/login/store">
         <div>
           <label for="username"></label>
-          <input type="text" name="username" placeholder="Nombre de usuario"></input>
+          <input type="email" name="email" placeholder="Nombre de usuario"></input>
         </div>
         
         <div>
