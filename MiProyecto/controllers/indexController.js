@@ -37,67 +37,104 @@ const controller = {
             return res.send("error")
         })
     },
-    register : function(req,res){
+    register : function(req,res){ 
         return res.render('registracion', {usuarioLogueado: false})
     },
     login : function(req,res){
-        return res.render('login', {usuarioLogueado: false})
+        if (req.session.user != undefined) {
+            return res.redirect('/')
+        } else {
+            return res.render('login')
+        }
     },
     registerPost : function(req,res){
-        
-        let user = {
-            nombre : req.body.name,
-            apellido : req.body.Apellido,
-            email : req.body.email,
-            pass : bcrypt.hashSync(req.body.password),
-            fecha_nac : req.body.Fecha ,
-            dni : req.body.dni,
-            foto : req.body.foto 
+        let errors = {};
+
+        if (req.body.email == "") {
+            errors.message = "El campo del email no puede estar vacío"
+            res.locals.errors = errors
+            return res.render("registracion")
         }
-        
-        usuario.create(user)
-        .then((result)=> {
-            return res.redirect('/login')
-        })
-        .catch((error)=> {
-            return res.send (error)
-        })
+        else if (req.body.password.length < 4) {
+            errors.message = "La contraseña no puede tener menos de 4 caracteres"
+            res.locals.errors = errors
+            return res.render("registracion")
+        }
+        else {
+            let user = {
+                nombre : req.body.name,
+                apellido : req.body.Apellido,
+                email : req.body.email,
+                pass : bcrypt.hashSync(req.body.password),
+                fecha_nac : req.body.Fecha,
+                dni : req.body.dni,
+                foto : req.body.foto 
+            }
+            
+            usuario.create(user)
+            .then((result)=> {
+                return res.redirect('/login')
+            })
+            .catch((error)=> {
+                if(error.errors[0].message == "email must be unique"){
+                    errors.message = "El email ya está registrado en la base de datos"
+                    res.locals.errors = errors
+                    return res.render("registracion")
+                }
+                return res.send(error)
+            })
+        }
     },
     loginPost : function(req,res){
         let emailBuscado = req.body.email
         let pass = req.body.password
         let remember = req.body.rememberme
-        let errors= []
-   
-    usuario.findOne({
-        where: [{email:emailBuscado}]
-    })
-    .then((result)=> {
-        let user = result.dataValues;
-        console.log(bcrypt.compareSync(pass, user.pass));
-       
-        if (user != null) {
-            let check = bcrypt.compareSync(pass, user.pass);
-          
-            if (check) {
-                req.session.user = user;
-                if (remember!=undefined) {
-                    res.cookie('userId', user.id_usuario,{maxAge:1000 * 60 * 5})
+        let errors= {}
+
+        if (emailBuscado == "") {
+            errors.message = "El campo email esta vacio";
+            res.locals.errors = errors;
+            return res.render("login");
+
+        } else if(req.body.password == ""){
+            errors.message = "El campo de contraseña esta vacio";
+            res.locals.errors = errors;
+            return res.render("login");
+
+        }else{
+            usuario.findOne({
+                where: [{email:emailBuscado}]
+            })
+            .then((result)=> {
+                let user = result.dataValues;
+                console.log(bcrypt.compareSync(pass, user.pass));
+               
+                if (user != null) {
+                    let check = bcrypt.compareSync(pass, user.pass);
+                  
+                    if (check) {
+                        req.session.user = user;
+                        if (remember!=undefined) {
+                            res.cookie('userId', user.id_usuario,{maxAge:1000 * 60 * 5})
+                        }
+                        return res.redirect('/usuarios/profile')
+                    }
+                    else {
+                        return res.render ('/login')
+                    }
                 }
-                return res.redirect('/usuarios/profile')
-            }
-            else {
-                return res.render ('/login')
+                else {
+                    return res.send("no existe usuario con el email:"+ emailBuscado)
+                }
+            })
+            .catch((error)=> {
+                return res.send({data:error})
+            })
+                
             }
         }
-        else {
-            return res.send("no existe usuario con el email:"+ emailBuscado)
-        }
-    })
-    .catch((error)=> {
-        return res.send({data:error})
-    })
-        
-    }
+   
+    
 }
+
 module.exports = controller

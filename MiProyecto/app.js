@@ -56,7 +56,7 @@ app.use(function(req,res,next){
   return next();
 })
 
-g
+
 app.use('/', indexRouter);
 app.use("/posteos" , posteosRouter)
 app.use("/usuarios" , usuariosRouter)
