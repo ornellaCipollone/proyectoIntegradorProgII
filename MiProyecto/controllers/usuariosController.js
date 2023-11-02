@@ -37,7 +37,32 @@ const controller = {
        
     },
     editarPerfil : function(req,res){
+        if (req.ession.user != undefined){
         return res.render('editarPerfil', {usuario: data, usuarioLogueado: true})
+        }
+        else {
+            return res.render('login')
+        }
+    },
+    editStore : function(req,res){
+        if (req.session.user != undefined) {
+        usuario.update({
+            nombre : req.body.Name,
+            pass : bcrypt.hashSync(req.body.password),
+            fecha_nac : req.body.fecha
+        },
+        { where : { id : req.session.user.id_usuario}}
+        )
+        .then(function(result){
+            return res.redirect('/')
+        })
+        .catch(function(error){
+            return res.send(error)
+        })
     }
+        else {
+            return res.redirect('/login')
+        }
+}
 }
 module.exports = controller
