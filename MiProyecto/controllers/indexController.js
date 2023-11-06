@@ -1,59 +1,81 @@
 const db = require('../database/models')
-const posteo  = db.Posteo
+const posteo = db.Posteo
 const usuario = db.Usuario
 const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs')
 
 const controller = {
-    index : function(req,res){
+    index: function (req, res) {
 
         posteo.findAll({
             include: [
-                {association: "posteoComentario", 
-                 include:[ {association: "comentarioUsuario"}]},
-                {association: "posteoUsuario"}
+                {
+                    association: "posteoComentario",
+                    include: [{ association: "comentarioUsuario" }]
+                },
+                { association: "posteoUsuario" }
             ]
         })
-        .then((datosEncontrados)=> {
-            //return res.send(datosEncontrados)
-            return res.render('index', {posteo : datosEncontrados, usuarioLogueado: false})
+            .then((datosEncontrados) => {
+                //return res.send(datosEncontrados)
+                return res.render('index', { posteo: datosEncontrados, usuarioLogueado: false })
 
-        }).catch((error)=> {
-            return res.send(error)
+            }).catch((error) => {
+                return res.send(error)
 
-        })        
+            })
     },
-    resultados : function(req,res){
-        let busqueda = req.query.busqueda
-        
+    resultados: function (req, res) {
+        let busqueda = req.query.busqueda;
+
+        let errors = {}
+
         posteo.findAll({
-            where : [ {pie : {[op.like] : "%"+busqueda+"%"}}],
-            include :  [
-                {association: "posteoComentario", 
-                 include:[ {association: "comentarioUsuario"}]},
-                {association: "posteoUsuario"}
-            ]
+            where: [{ pie: { [op.like]: "%" + busqueda + "%" } }],
+            include: [
+                {
+                    association: "posteoComentario",
+                    include: [{ association: "comentarioUsuario" }]
+                },
+                { association: "posteoUsuario" }
+            ],
+            order: [['created_at', "DESC"]]
         })
-        .then((datosEncontrados)=> {
-            //return res.send(datosEncontrados)
-            return res.render('resultadoBusqueda', {posteo: datosEncontrados}) 
-            // res.send(datosEncontrados)
-    })
-        .catch((error)=> {
-            return res.send("error")
-        })
+            .then((datosEncontrados) => {
+
+                // return res.send({data:datosEncontrados.length})
+
+                if (datosEncontrados.length == 0) {
+                    errors.message = "No hay resultados para su busqueda"
+                    res.locals.errors = errors
+                    return res.render("resultadoBusqueda")
+
+                }else{
+                    return res.render('resultadoBusqueda', { posteo: datosEncontrados })
+
+                }
+
+
+
+            })
+            .catch((error) => {
+                console.log(error)
+                return res.send(error)
+
+
+            })
     },
-    register : function(req,res){ 
-        return res.render('registracion' )
+    register: function (req, res) {
+        return res.render('registracion')
     },
-    login : function(req,res){
+    login: function (req, res) {
         if (req.session.user != undefined) {
             return res.redirect('/')
         } else {
             return res.render('login')
         }
     },
-    registerPost : function(req,res){
+    registerPost: function (req, res) {
         let errors = {};
 
         if (req.body.email == "") {
@@ -68,83 +90,83 @@ const controller = {
         }
         else {
             let user = {
-                nombre : req.body.name,
-                apellido : req.body.Apellido,
-                email : req.body.email,
-                pass : bcrypt.hashSync(req.body.password),
-                fecha_nac : req.body.Fecha,
-                dni : req.body.dni,
-                foto : req.body.foto 
+                nombre: req.body.name,
+                apellido: req.body.Apellido,
+                email: req.body.email,
+                pass: bcrypt.hashSync(req.body.password),
+                fecha_nac: req.body.Fecha,
+                dni: req.body.dni,
+                foto: req.body.foto
             }
-            
+
             usuario.create(user)
-            .then((result)=> {
-                return res.redirect('/login')
-            })
-            .catch((error)=> {
-                if(error.errors[0].message == "email must be unique"){
-                    errors.message = "El email ya está registrado en la base de datos"
-                    res.locals.errors = errors
-                    return res.render("registracion")
-                }
-                return res.send(error)
-            })
+                .then((result) => {
+                    return res.redirect('/login')
+                })
+                .catch((error) => {
+                    if (error.errors[0].message == "email must be unique") {
+                        errors.message = "El email ya está registrado en la base de datos"
+                        res.locals.errors = errors
+                        return res.render("registracion")
+                    }
+                    return res.send(error)
+                })
         }
     },
-    loginPost : function(req,res){
+    loginPost: function (req, res) {
         let emailBuscado = req.body.email
         let pass = req.body.password
         let remember = req.body.rememberme
-        let errors= {}
+        let errors = {}
 
         if (emailBuscado == "") {
             errors.message = "El campo email esta vacio";
             res.locals.errors = errors;
             return res.render("login");
 
-        } else if(req.body.password == ""){
+        } else if (req.body.password == "") {
             errors.message = "El campo de contraseña esta vacio";
             res.locals.errors = errors;
             return res.render("login");
 
-        }else{
+        } else {
             usuario.findOne({
-                where: [{email:emailBuscado}]
+                where: [{ email: emailBuscado }]
             })
-            .then((result)=> {
-                let user = result.dataValues;
-                console.log(bcrypt.compareSync(pass, user.pass));
-               
-                if (user != null) {
-                    let check = bcrypt.compareSync(pass, user.pass);
-                  
-                    if (check) {
-                        req.session.user = user;
-                        if (remember!=undefined) {
-                            res.cookie('userId', user.id_usuario,{maxAge:1000 * 60 * 5})
+                .then((result) => {
+                    let user = result.dataValues;
+                    console.log(bcrypt.compareSync(pass, user.pass));
+
+                    if (user != null) {
+                        let check = bcrypt.compareSync(pass, user.pass);
+
+                        if (check) {
+                            req.session.user = user;
+                            if (remember != undefined) {
+                                res.cookie('userId', user.id_usuario, { maxAge: 1000 * 60 * 5 })
+                            }
+                            return res.redirect('/usuarios/profile')
                         }
-                        return res.redirect('/usuarios/profile')
+                        else {
+                            return res.redirect('/')
+                        }
                     }
                     else {
-                        return res.redirect ('/')
+                        return res.send("no existe usuario con el email:" + emailBuscado)
                     }
-                }
-                else {
-                    return res.send("no existe usuario con el email:"+ emailBuscado)
-                }
-            })
-            .catch((error)=> {
-                return res.send({data:error})
-            })
-                
-            }
-        },
-        logout: function(req,res){
-            req.session.user = undefined
-            return res.redirect('/')
+                })
+                .catch((error) => {
+                    return res.send({ data: error })
+                })
+
         }
-   
-    
+    },
+    logout: function (req, res) {
+        req.session.user = undefined
+        return res.redirect('/')
+    }
+
+
 }
 
 module.exports = controller

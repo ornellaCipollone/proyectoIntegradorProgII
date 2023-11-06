@@ -40,7 +40,7 @@
                 
                    <div class="post-comentarios">
                         <h4>Comentarios</h4>
-                            <% for( let j=0; j < 3; j++ ) { %>
+                            <% for( let j=0; j < posteo[i].posteoComentario.length ; j++ ) { %>
                                 <div>
                                     <h4>
                                         <a href="/usuarios/detalleUsuario/id/<%= posteo[i].posteoComentario[j].comentarioUsuario.id_usuario%>">

@@ -14,6 +14,9 @@ module.exports = function (sequelize, dataTypes) {
         pie: {
             type: dataTypes.STRING
         },
+        id_usuario: {
+            type: dataTypes.INTEGER
+        },
         created_at: {
             type: dataTypes.DATE
         },

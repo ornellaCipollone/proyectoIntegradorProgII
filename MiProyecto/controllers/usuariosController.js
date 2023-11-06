@@ -12,6 +12,7 @@ const controller = {
                 {association: "usuarioPosteo", 
                 include: [{ association: "posteoComentario" }]}
             ]
+            
         })
         .then((resultado)=> {
             // res.send(resultado)
@@ -26,6 +27,7 @@ const controller = {
         let idUsuarioLogueado = req.session.user.id_usuario;
         usuario.findByPk(idUsuarioLogueado,{
             include : [{association : "usuarioPosteo"}]
+            
         })
         .then(function(result){
             return res.render('miPerfil',{usuario:result})

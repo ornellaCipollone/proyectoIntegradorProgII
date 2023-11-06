@@ -11,6 +11,12 @@ module.exports = function (sequelize, dataTypes) {
         texto: {
             type: dataTypes.STRING(200)
         },
+        id_post :{
+            type: dataTypes.INTEGER
+        },
+        id_usuario :{
+            type: dataTypes.INTEGER
+        },
         created_at: {
             type: dataTypes.DATE
         },
