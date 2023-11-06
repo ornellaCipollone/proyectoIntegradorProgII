@@ -9,4 +9,5 @@ router.get('/register', controller.register)
 router.post('/register/store',controller.registerPost)
 router.get('/login', controller.login)
 router.post('/login/store',controller.loginPost)
+router.post('/',controller.logout)
 module.exports = router

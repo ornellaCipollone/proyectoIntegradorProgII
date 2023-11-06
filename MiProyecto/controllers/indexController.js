@@ -26,11 +26,17 @@ const controller = {
     resultados : function(req,res){
         let busqueda = req.query.busqueda
         
-        usuario.findAll({
-            where : [ {nombre : {[op.like] : "%"+busqueda+"%"}}]
+        posteo.findAll({
+            where : [ {pie : {[op.like] : "%"+busqueda+"%"}}],
+            include :  [
+                {association: "posteoComentario", 
+                 include:[ {association: "comentarioUsuario"}]},
+                {association: "posteoUsuario"}
+            ]
         })
         .then((datosEncontrados)=> {
-            return res.render('resultadoBusqueda', {usuario: datosEncontrados, usuarioLogueado: true}) 
+            //return res.send(datosEncontrados)
+            return res.render('resultadoBusqueda', {posteo: datosEncontrados}) 
             // res.send(datosEncontrados)
     })
         .catch((error)=> {
@@ -38,7 +44,7 @@ const controller = {
         })
     },
     register : function(req,res){ 
-        return res.render('registracion', {usuarioLogueado: false})
+        return res.render('registracion' )
     },
     login : function(req,res){
         if (req.session.user != undefined) {
@@ -120,7 +126,7 @@ const controller = {
                         return res.redirect('/usuarios/profile')
                     }
                     else {
-                        return res.render ('/login')
+                        return res.redirect ('/')
                     }
                 }
                 else {
@@ -132,6 +138,10 @@ const controller = {
             })
                 
             }
+        },
+        logout: function(req,res){
+            req.session.user = undefined
+            return res.redirect('/')
         }
    
     

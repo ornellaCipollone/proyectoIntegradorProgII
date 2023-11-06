@@ -12,12 +12,21 @@
                 <input type="submit" value="enviar">
             </form>
         </div>
+        <div class="saludoUsuario">
+            <p>Bienvenido <%= locals.user.nombre %></p>
+        </div>
         <div class="navbar-right">
             <ul class="menu">
                 <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
                 <li><a href="/posteos/agregarPost"><i class="fa-regular fa-square-plus"></i></a></li>
                 <li><a href="/usuarios/profile"><i class="fa-regular fa-user"></i></a></li>
-                <li><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
+                <li>
+                    <form action="/" method="POST">
+                        <button class="logout" type="submit">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
