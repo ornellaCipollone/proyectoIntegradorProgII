@@ -40,6 +40,26 @@ const controller = {
 
 
 
+    },
+    borrar : function(req,res){
+        let idPost= req.params.id
+        post.destroy({
+            where : {id : idPost}
+        })
+        .then(function(result){
+            return res.redirect('/usuarios/profile')
+        })
+        .catch(function(error){
+           return res.send(error)
+        })
+    },
+    editarPost: function(req,res){
+        let idPost= req.params.id
+        post.update({
+            foto : req.body.img,
+            pie: req.body.pie
+        },
+        { where : {id :idPost}})
     }
 }
 module.exports = controller
