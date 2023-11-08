@@ -52,7 +52,7 @@ SELECT*FROM usuario;
 INSERT INTO posteo 
 VALUES (DEFAULT,"https://images.philips.com/is/image/PhilipsConsumer/TAH4205BK_00-IMS-es_AR?$jpglarge$&wid=960","Miren los nuevos auriculares Philips!",1,DEFAULT,DEFAULT,DEFAULT);
 INSERT INTO posteo 
-VALUES (DEFAULT,"src=https://app.contabilium.com/files/explorer/16277/Productos-Servicios/concepto-6023873.jpg","Lo amo!",2,DEFAULT,DEFAULT,DEFAULT);
+VALUES (DEFAULT,"src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf7-zDRMKJ4XQGgT7FKlVYLa6vCbZTln8-iw&usqp=CAU","Lo amo!",2,DEFAULT,DEFAULT,DEFAULT);
 INSERT INTO posteo 
 VALUES (DEFAULT,"https://blog.formaciongerencial.com/wp-content/uploads/2017/11/bigstock-Internet-Business-Technology-428549714_1024X684-1024x640.png","Nuevas tendencias",3,DEFAULT,DEFAULT,DEFAULT);
 INSERT INTO posteo 

@@ -13,7 +13,7 @@
         <div class="post-detail container">
             
             <section class="center main-content post">
-                <% if (locals.user.id_usuario == post.posteoUsuario.id_usuario){%>
+                <% if (locals.user != undefined && locals.user.id_usuario == post.posteoUsuario.id_usuario){%>
                     <div class="borrarPost">
                         <form action="/borrarPost/id/<%= post.id_posteo %>">
                             <button type="submit">Borrar Post</button>

@@ -9,8 +9,7 @@ const controller = {
 
         posteo.findAll({
             include: [
-                {
-                    association: "posteoComentario",
+                {   association: "posteoComentario",
                     include: [{ association: "comentarioUsuario" }]
                 },
                 { association: "posteoUsuario" }
@@ -164,8 +163,6 @@ const controller = {
         req.session.user = undefined
         return res.redirect('/')
     }
-
-
 }
 
 module.exports = controller
