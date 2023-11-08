@@ -12,6 +12,7 @@ const controller = {
                 {association: "usuarioPosteo", 
                 include: [{ association: "posteoComentario" }]}
             ]
+            
         })
         .then((resultado)=> {
             // res.send(resultado)
@@ -26,6 +27,7 @@ const controller = {
         let idUsuarioLogueado = req.session.user.id_usuario;
         usuario.findByPk(idUsuarioLogueado,{
             include : [{association : "usuarioPosteo"}]
+            
         })
         .then(function(result){
             return res.render('miPerfil',{usuario:result})
@@ -37,8 +39,9 @@ const controller = {
        
     },
     editarPerfil : function(req,res){
-        if (req.ession.user != undefined){
-        return res.render('editarPerfil', {usuario: data, usuarioLogueado: true})
+        
+        if (req.session.user != undefined){
+        return res.render('editarPerfil', {usuario: req.session.user, usuarioLogueado: true})
         }
         else {
             return res.render('login')
