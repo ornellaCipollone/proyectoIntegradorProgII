@@ -63,7 +63,6 @@ const controller = {
         else {
             let user = {
                 nombre : req.body.name,
-                apellido : req.body.Apellido,
                 email : req.body.email,
                 pass : bcrypt.hashSync(req.body.password),
                 fecha_nac : req.body.Fecha,
@@ -133,8 +132,6 @@ const controller = {
                 
             }
         }
-   
-    
 }
 
 module.exports = controller
