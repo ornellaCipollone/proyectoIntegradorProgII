@@ -41,7 +41,7 @@ app.use(function(req,res,next){
 app.use(function(req,res,next){
   if (req.cookies.userId != undefined && req.session.user== undefined) {
     let idUsuario = req.cookies.userId
-    db.User.findByPk(idUsuario)
+    db.Usuario.findByPk(idUsuario)
     .then(function(user){
       req.session.user = user.dataValues
       res.locals.user=user.dataValues

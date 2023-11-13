@@ -1,5 +1,6 @@
 const db = require('../database/models')
 const post = db.Posteo
+const com = db.Comentario
 const bcrypt = require('bcryptjs')
 
 const controller = {
@@ -12,6 +13,9 @@ const controller = {
                     include: [{ association: "comentarioUsuario" }]
                 },
                 { association: "posteoUsuario" }
+            ],
+            order: [
+                ["posteoComentario", "created_at", "DESC"]
             ]
         })
             .then((result) => {
@@ -32,11 +36,11 @@ const controller = {
                 pie: req.body.pie,
                 id_usuario: req.session.user.id_usuario
             })
-            .then(function (req,res) {
+            .then(function (result) {
                 // res.send(req.body)
-                return res.redirect('/')
+                return res.redirect("/usuarios/profile")
             })
-            .catch(function (req,res) {
+            .catch(function (error) {
                 // res.send(req.body)
                 return res.send(error)
             });  
@@ -48,23 +52,51 @@ const controller = {
     },
     borrar : function(req,res){
         let idPost= req.params.id
-        post.destroy({
-            where : {id : idPost}
-        })
-        .then(function(result){
-            return res.redirect('/usuarios/profile')
-        })
-        .catch(function(error){
-           return res.send(error)
-        })
+        if (req.session.user != undefined) {
+            post.destroy({
+                where : {id : idPost}
+            })
+            .then(function(result){
+                return res.redirect('/usuarios/profile')
+            })
+            .catch(function(error){
+               return res.send(error)
+            })
+        } else {
+            return res.render(`/posteos/detallePost/id/${req.params.id}`)
+        }
     },
     editarPost: function(req,res){
         let idPost= req.params.id
-        post.update({
-            foto : req.body.img,
-            pie: req.body.pie
-        },
-        { where : {id :idPost}})
+        if (req.session.user != undefined) {
+            post.update({
+                foto : req.body.img,
+                pie: req.body.pie
+            },
+            { where : {id :idPost}})    
+        } else {
+            return res.render(`/posteos/detallePost/id/${req.params.id}`)
+        }
+    },
+    agregarCom: function (req,res) {
+        if(req.session.user !=undefined){
+            
+            let comentario = {
+                texto : req.body.comment,
+                id_post: req.params.id,
+                id_usuario: req.session.user.id_usuario
+            }
+            
+            com.create(comentario)
+            .then(function(params) {
+                return res.redirect( `/posteos/detallePost/id/${req.params.id}`)
+            })
+            .catch(function(error) {
+                return res.send(error)
+            })
+        }else {
+            return res.render("login")
+        }
     }
 }
 module.exports = controller

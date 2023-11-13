@@ -33,6 +33,11 @@
           <input type="checkbox" id="rememberme" name="rememberme">
           <label for="rememberme">Recordarme</label>
         </div>
+        
+        <% if(locals.errors){  %> 
+          <p class= “error”> <%= errors.message %> </p>
+        <% } %>
+        
       </form>
     </section>
   </main>

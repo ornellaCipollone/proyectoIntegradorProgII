@@ -30,8 +30,10 @@ const controller = {
 
         let idUsuarioLogueado = req.session.user.id_usuario;
         usuario.findByPk(idUsuarioLogueado, {
-            include: [{ association: "usuarioPosteo" }]
-
+            include: [{ association: "usuarioPosteo" }],
+            order: [
+                ["usuarioPosteo", "created_at", "DESC"]
+            ]
         })
             .then(function (result) {
                 //return res.send(result)
@@ -40,8 +42,6 @@ const controller = {
             .catch(function (error) {
                 return res.send(error)
             })
-
-
     },
     editarPerfil: function (req, res) {
 
@@ -54,18 +54,23 @@ const controller = {
     },
     editStore: function (req, res) {
         if (req.session.user != undefined) {
-
             let userUpdate = {
                 nombre: req.body.Name,
-                pass: bcrypt.hashSync(req.body.password),
-                fecha_nac: req.body.fecha
+                email: req.body.email,
+                fecha_nac: req.body.fecha,
+                foto: req.body.foto
             };
-
+            
+            if (req.body.password != "") {
+               userUpdate.pass = bcrypt.hashSync(req.body.password)
+            }
+            
             usuario.update(userUpdate,
                 { where: { id_usuario: req.session.user.id_usuario } }
             )
                 .then(function (result) {
                     console.log(userUpdate);
+                    req.session.user = result
                     return res.redirect('/')
                 })
                 .catch(function (error) {

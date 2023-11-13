@@ -46,10 +46,13 @@
             <section class="right">
                 <h4>Comentarios</h4>
                 <section class="comments">
-                    <form action="" class="comment-form">
-                        <input type="text" class="input" placeholder="Agregar comentario">
-                        <button type="submit">Comentar</button>
-                    </form>
+                    <% if (locals.user != undefined) { %>
+                        <form action="/posteos/agregarCom/id/<%= post.id_posteo %>" class="comment-form" method = "POST">
+                            <input type="text" class="input" name= "comment" placeholder="Agregar comentario">
+                            <button type="submit">Comentar</button>
+                        </form>
+                    <% } %>
+                    
                             
                     <div>
                         <% for( let i=0; i < post.posteoComentario.length; i++ ) { %>
