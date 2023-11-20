@@ -149,8 +149,9 @@ const controller = {
 
                         if (check) {
                             req.session.user = user;
-                            if (remember != undefined) {
-                                return res.cookie('userId', user.id_usuario, { maxAge: 5000 * 60 * 5 })
+                            if (req.body.rememberme != undefined) {
+                                res.cookie('userId', user.id_usuario, { maxAge: 5000 * 60 * 5 })
+                                
                             }
                             return res.redirect('/usuarios/profile')
                         }

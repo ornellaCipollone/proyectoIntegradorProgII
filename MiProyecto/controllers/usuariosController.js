@@ -69,9 +69,19 @@ const controller = {
                 { where: { id_usuario: req.session.user.id_usuario } }
             )
                 .then(function (result) {
-                    console.log(userUpdate);
-                    req.session.user = result
-                    return res.redirect('/')
+                    console.log(result);
+                    
+                    return usuario.findOne({ where: { id_usuario: req.session.user.id_usuario } })
+                    
+                    .then(function (updatedUser) {
+                        // Aquí tienes el registro actualizado
+                        console.log("Registro actualizado:", updatedUser);
+                        req.session.user = updatedUser;
+                        return res.redirect('/');
+                    })
+                    .catch(function (error) {
+                        return res.send(error)
+                    })
                 })
                 .catch(function (error) {
                     return res.send(error)
