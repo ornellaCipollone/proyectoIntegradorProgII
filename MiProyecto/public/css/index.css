@@ -122,6 +122,7 @@ button:hover {
 .comment .user {
     font-weight: bold;
 }
+
 .profile {
     width: 100px;
     height: 100px;
@@ -138,15 +139,6 @@ button:hover {
     margin: 0;
 }
 
-.follow {
-    text-decoration: none;
-    color: #333;
-    margin-left: 10px;
-}
-
-.follow:hover {
-    text-decoration: underline;
-}
 
 .meta {
     list-style: none;
@@ -161,15 +153,19 @@ button:hover {
 
 .bottom {
     margin-top: 20px;
+   
 }
 
 .post {
     margin-bottom: 20px;
+    flex-direction: column;
+ 
 }
 
 .post img {
-    max-width: 100%;
-    height: auto;
+    max-width: 400px;
+    height:auto;
+    
 }
 
 .post p {
@@ -209,14 +205,12 @@ button:hover {
   input[type="submit"]:hover {
     background-color: #555;
   }
-  
-  /* Estilos para la casilla de verificación */
+ 
   input[type="checkbox"] {
     margin-right: 5px;
   }
   
 
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -226,14 +220,14 @@ body {
 
 
 
-/* Encabezado */
+
 header {
     background-color: #333;
     color: #fff;
     text-align: center;
 }
 
-/* Navegación */
+
 nav {
     background-color: #444;
 }
@@ -255,7 +249,7 @@ nav ul li a {
     font-weight: bold;
 }
 
-/* Publicaciones */
+
 .post {
     background-color: #fff;
     margin-bottom: 20px;
@@ -277,9 +271,6 @@ a:hover {
 }
 
 
-
-
-/* Generics */
 *{
     box-sizing: border-box;
 }
@@ -302,7 +293,7 @@ body {
     padding: 0;
     color:#777
 }
-/* navigation */
+
 header {
     position: fixed;
     top: 0;
@@ -312,11 +303,11 @@ header {
 }
 
 .logo {
-    display: block; /* Hace que la imagen sea un elemento de bloque para controlar su posición */
-    float: left; /* Flota la imagen a la izquierda */
-    margin: 10px; /* Agrega margen alrededor de la imagen para separarla de otros elementos */
-    width: 150px; /* Ancho de la imagen */
-    height: 80px; /* Altura de la imagen */
+    display: block;
+    float: left; 
+    margin: 10px; 
+    width: 150px;
+    height: 80px; 
   }
 .main-nav {
     display: flex;
@@ -363,7 +354,7 @@ header {
     font-size: 25px;
 }
 
-/* Main */
+
 main {
     background-color: #fafafa;
     display: flex;
@@ -378,7 +369,7 @@ main {
     max-width: 470px;
 }
 
-/* post */
+
 .post{
     background-color: #fff;
     border: 1px solid #ddd;
@@ -491,7 +482,7 @@ main {
     margin: 0;
 }
 
-/* Footer  */
+
 .main-footer,
 .social,
 .team {
@@ -517,7 +508,7 @@ main {
     margin-left: 20px;
 }
 
-/* Post detail */
+
 .post-detail {
     display: flex;
     flex-direction: row;
@@ -585,7 +576,7 @@ main {
     cursor: pointer;
     background-color: forestgreen;
 }
-/* User detail */
+
 
 .user-detail{
     display: flex;
@@ -604,14 +595,8 @@ main {
     padding: 0 40px;
     width: 70%;
 }
-.user-detail .post{
-    width: 200px;
-    padding: 5px 5px 20px 5px;
-    border-radius: 0;
-}
-.user-detail .post img{
-    width: 100%;
-}
+
+
 .user-detail .top {
     display: flex;
     flex-wrap: nowrap;
@@ -622,18 +607,8 @@ main {
     border-bottom: 1px solid #ddd;
     max-width: 500px;
 }
-.follow {
-    padding: 3px 20px 7px;
-    background-color: mediumseagreen;
-    border: 1px solid mediumaquamarine;
-    border-radius: 5px;
-    color: #fff;
-    margin-left: 20px;
-}
-.follow:hover{
-    cursor: pointer;
-    background-color: forestgreen;
-}
+
+
 .profile {
     border-radius: 90%;
     border: 2px solid chocolate;
@@ -645,4 +620,4 @@ main {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-}
+} 
