@@ -4,7 +4,23 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.canc {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 10px;
+    overflow: scroll;
+    margin-bottom: 100px;
+    text-align: center;
+  }
+  
+  
+  .canc img {
+    height: 200x;
+    width: 200px;
+    margin-right: 20px;
+    margin-left: 20px;
+text-align: center;
+  }
 header {
     background-color: #333;
     color: white;
@@ -15,9 +31,7 @@ header {
 main {
     padding: 20px;
 }
-.photo{
-align-items: center;
-}
+
 
 h1 {
     font-size: 24px;
@@ -132,9 +146,7 @@ button:hover {
     border-radius: 50%;
     margin-right: 20px;
 }
-.info-usuario {
-    display: inline-block;
-}
+
 
 .info-usuario p {
     font-size: 24px;
@@ -156,6 +168,8 @@ button:hover {
 
 .bottom {
     margin-top: 20px;
+    flex-direction: column;
+
    
 }
 
@@ -391,6 +405,7 @@ main {
 .info-usuario {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     flex-direction: row;
     justify-content:flex-start;
     align-items: center;
